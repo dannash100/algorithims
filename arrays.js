@@ -59,24 +59,22 @@ The palindrome does not need to be limited to just dictionary words.
 const isOdd = n => Math.abs(n % 2) === 1
 
 const permutationOfPalindrome = string => {
-  let characters = {}
-
   const stringArray = string.toLowerCase().replace(/\s/g, '').split('')
 
-  stringArray.forEach(char => {
-    !characters[char] ? characters[char] = 1 : characters[char]++
-  })
+  const charFrequencies = stringArray.reduce((amounts, char) => {
+    !amounts[char] ? amounts[char] = 1 : amounts[char]++
+    return amounts
+  }, {})
 
-  const oddCount = Object.values(characters).filter(occurrences => isOdd(occurrences)).length
+  const oddCount = Object.values(charFrequencies).filter(frequency => isOdd(frequency)).length
 
   return oddCount === 1
 }
-
-console.log(permutationOfPalindrome('tactc oapapa'))
 
 module.exports = {
   isUnique,
   checkPermutation,
   checkPermutation2,
-  URLify
+  URLify,
+  permutationOfPalindrome
 }
