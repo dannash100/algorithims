@@ -17,7 +17,8 @@ const sortString = string => string.split('').sort().join()
 
 const checkPermutation = (string, string2) => sortString(string) === sortString(string2)
 
-// second answer interpreted and converted to js from solution notes
+// second answer follows defininition of permutation - two words with same character counts
+// adapted and interpreted in js from solutions
 
 const checkPermutation2 = (string, string2) => {
   if (string.length !== string2.length) return false
@@ -41,9 +42,41 @@ const checkPermutation2 = (string, string2) => {
 
   return true
 }
+/* URLify: Write a method to replace all spaces between words in a string with '%20'.
+*/
+
+const URLify = string => string.trim().replace(/\s/g, '%20')
+
+/*
+Palindrome Permutation: Given a string, write a function to check if it is a permutation of a palindrome.
+A palindrome is a word or phrase that is the same forwards and backwards.
+A permutation is a rearrangement of letters.
+The palindrome does not need to be limited to just dictionary words.
+*/
+
+// string must have even number of all but one character which can have an odd count- pivot;
+
+const isOdd = n => Math.abs(n % 2) === 1
+
+const permutationOfPalindrome = string => {
+  let characters = {}
+
+  const stringArray = string.toLowerCase().replace(/\s/g, '').split('')
+
+  stringArray.forEach(char => {
+    !characters[char] ? characters[char] = 1 : characters[char]++
+  })
+
+  const oddCount = Object.values(characters).filter(occurrences => isOdd(occurrences)).length
+
+  return oddCount === 1
+}
+
+console.log(permutationOfPalindrome('tactc oapapa'))
 
 module.exports = {
   isUnique,
   checkPermutation,
-  checkPermutation2
+  checkPermutation2,
+  URLify
 }
