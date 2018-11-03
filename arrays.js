@@ -99,7 +99,7 @@ const shortestString = (...strings) => {
 
 const oneEditAway = (string, string2) => {
   const lengthDifference = Math.abs(string.length - string2.length)
-  if (Math.abs(lengthDifference > 1)) return false
+  if (lengthDifference > 1) return false
 
   let longest = sortString(longestString(string, string2))
   let shortest = sortString(shortestString(string, string2))
