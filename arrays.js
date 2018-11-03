@@ -58,15 +58,22 @@ The palindrome does not need to be limited to just dictionary words.
 
 const isOdd = n => Math.abs(n % 2) === 1
 
-const isPermutationOfPalindrome = string => {
-  const stringArray = string.toLowerCase().replace(/\s/g, '').split('')
+const charFrequencies = (string, countWhitespace, caseSensitive) => {
+  if (!countWhitespace) string = string.replace(/\s/g, '')
+  if (!caseSensitive) string = string.toLowerCase()
 
-  const charFrequencies = stringArray.reduce((amounts, char) => {
+  let charArray = string.split('')
+
+  return charArray.reduce((amounts, char) => {
     !amounts[char] ? amounts[char] = 1 : amounts[char]++
     return amounts
   }, {})
+}
 
-  const oddCount = Object.values(charFrequencies).filter(frequency => isOdd(frequency)).length
+const isPermutationOfPalindrome = string => {
+  let frequencies = charFrequencies(string)
+
+  const oddCount = Object.values(frequencies).filter(frequency => isOdd(frequency)).length
 
   return oddCount === 1
 }
