@@ -15,12 +15,12 @@ one is a permutation of the other. */
 
 const sortString = string => string.split('').sort().join()
 
-const checkPermutation = (string, string2) => sortString(string) === sortString(string2)
+const isPermutation = (string, string2) => sortString(string) === sortString(string2)
 
 // second answer follows defininition of permutation - two words with same character counts
 // adapted and interpreted in js from solutions
 
-const checkPermutation2 = (string, string2) => {
+const isPermutation2 = (string, string2) => {
   if (string.length !== string2.length) return false
 
   let letters = {}
@@ -58,7 +58,7 @@ The palindrome does not need to be limited to just dictionary words.
 
 const isOdd = n => Math.abs(n % 2) === 1
 
-const permutationOfPalindrome = string => {
+const isPermutationOfPalindrome = string => {
   const stringArray = string.toLowerCase().replace(/\s/g, '').split('')
 
   const charFrequencies = stringArray.reduce((amounts, char) => {
@@ -73,8 +73,8 @@ const permutationOfPalindrome = string => {
 
 module.exports = {
   isUnique,
-  checkPermutation,
-  checkPermutation2,
+  isPermutation,
+  isPermutation2,
   URLify,
-  permutationOfPalindrome
+  isPermutationOfPalindrome
 }
