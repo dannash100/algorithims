@@ -1,0 +1,2 @@
+# algorithims
+algorithm practise js
