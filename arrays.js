@@ -64,10 +64,12 @@ const charFrequencies = (string, countWhitespace, caseSensitive) => {
 
   let charArray = string.split('')
 
-  return charArray.reduce((amounts, char) => {
+  const frequencies = charArray.reduce((amounts, char) => {
     !amounts[char] ? amounts[char] = 1 : amounts[char]++
     return amounts
   }, {})
+
+  return frequencies
 }
 
 const isPermutationOfPalindrome = string => {
