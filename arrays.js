@@ -13,7 +13,8 @@ one is a permutation of the other. */
 
 // answer assumes whitespace is significant
 
-const sortString = string => string.split('').sort().join()
+// eslint-disable-next-line no-useless-escape
+const sortString = string => string.split('').sort().join().replace(/,/g, '')
 
 const isPermutation = (string, string2) => sortString(string) === sortString(string2)
 
@@ -78,6 +79,33 @@ const isPermutationOfPalindrome = string => {
   const oddCount = Object.values(frequencies).filter(frequency => isOdd(frequency)).length
 
   return oddCount === 1
+}
+
+/*
+One Away: There are three types of edits that can be performed on strings:
+insert a character, remove a character, or replace a character.
+Given two strings, write a function to check if they are one edit (or zero edits) away.
+EXAMPLE
+pale, ple true pales, pale -> true pale, bale -> true pale, bae -> false
+*/
+
+const longestString = (...strings) => {
+  return strings.sort((a, b) => b.length - a.length)[0]
+}
+
+const shortestString = (...strings) => {
+  return strings.sort((a, b) => b.length - a.length)[strings.length - 1]
+}
+
+const oneEditAway = (string, string2) => {
+  const lengthDifference = Math.abs(string.length - string2.length)
+  if (Math.abs(lengthDifference > 1)) return false
+
+  let longest = sortString(longestString(string, string2))
+  let shortest = sortString(shortestString(string, string2))
+
+  if (lengthDifference) longest = longest.slice(0, -1)
+  return longest === shortest
 }
 
 module.exports = {
