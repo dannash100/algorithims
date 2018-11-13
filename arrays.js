@@ -113,5 +113,6 @@ module.exports = {
   isPermutation,
   isPermutation2,
   URLify,
-  isPermutationOfPalindrome
+  isPermutationOfPalindrome,
+  oneEditAway
 }
