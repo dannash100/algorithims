@@ -78,7 +78,7 @@ const isPermutationOfPalindrome = string => {
 
   const oddCount = Object.values(frequencies).filter(frequency => isOdd(frequency)).length
 
-  return oddCount === 1
+  return oddCount <= 1
 }
 
 /*
