@@ -13,7 +13,6 @@ one is a permutation of the other. */
 
 // answer assumes whitespace is significant
 
-// eslint-disable-next-line no-useless-escape
 const sortString = string => string.split('').sort().join().replace(/,/g, '')
 
 const isPermutation = (string, string2) => sortString(string) === sortString(string2)
@@ -108,11 +107,72 @@ const oneEditAway = (string, string2) => {
   return longest === shortest
 }
 
+/*
+String Compression: Implement a method to perform basic string compression using the counts of repeated characters. For example, the string aabcccccaaa would become a2blc5a3. If the "compressed" string would not become smaller than the original string, your method should return
+the original string. You can assume the string has only uppercase and lowercase letters (a - z).
+*/
+
+const compressString = string => {
+  let charArray = string.split('')
+  let compressedString = ''
+  let count = 0
+
+  charArray.forEach((char, i) => {
+    count++
+    if (i + 1 >= charArray.length || char !== charArray[i + 1]) {
+      compressedString += char + count
+      count = 0
+    }
+  })
+  return compressString.length < string ? compressedString : string
+}
+
+// works ok but string concatenation operations in n squared O time
+// reccomeded method
+
+const compressStringOptimized = string => {
+  const charArray = string.split('')
+  const finalLength = countCompression(charArray)
+  const compressedCharArray = []
+  console.log(finalLength)
+
+  if (finalLength >= string.length) return string
+
+  let count = 0
+  charArray.forEach((char, i) => {
+    count++
+    if (i + 1 >= charArray.length || char !== charArray[i + 1]) {
+      compressedCharArray.push(char)
+      compressedCharArray.push(count)
+      count = 0
+    }
+  })
+  return compressedCharArray.join('')
+}
+
+const countCompression = charArray => {
+  let compressedLength = 0
+  let count = 0
+
+  charArray.forEach((char, i) => {
+    count++
+    if (i + 1 >= charArray.length || char !== charArray[i + 1]) {
+      compressedLength += 1 + count.toString().length
+      count = 0
+    }
+  })
+  return compressedLength
+}
+
+console.log(compressStringOptimized('dddddddddddgggggdooooogo'))
+
 module.exports = {
   isUnique,
   isPermutation,
   isPermutation2,
   URLify,
   isPermutationOfPalindrome,
-  oneEditAway
+  oneEditAway,
+  compressString,
+  compressStringOptimized
 }
